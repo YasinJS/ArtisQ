@@ -38,6 +38,7 @@ abstract class Model
      */
     public function __call(string $name, array $arguments): mixed
     {
+        /** @phpstan-ignore-next-line */
         return $this->$name(...$arguments);
     }
 
@@ -46,7 +47,10 @@ abstract class Model
         else (new ModelQueryBuilder($this, "create"));
     }
 
-    public function fetch(): array | static{
+    /**
+     * @return Model[] | Model
+     */
+    public function fetch(): array | Model {
         $this->setSaved(true);
         return (new ModelQueryBuilder($this, "get"))->getModels();
     }
