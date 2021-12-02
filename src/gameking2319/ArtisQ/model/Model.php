@@ -12,7 +12,7 @@ abstract class Model
     /** @var bool */
     private bool $saved = false;
 
-    /** @var string[] */
+    /** @var array<string, mixed> */
     private array $conditions = [];
 
     private function where(string $key, string $condition, mixed $value): static {
@@ -60,7 +60,7 @@ abstract class Model
     abstract public function getTable(): string;
 
     /**
-     * @return string[]
+     * @return array<string, mixed>
      */
     public function getConditions(): array
     {

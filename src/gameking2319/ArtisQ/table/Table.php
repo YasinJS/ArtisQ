@@ -49,7 +49,7 @@ final class Table
     }
 
     /**
-     * @return array<string, string[]>
+     * @return array<string, mixed>
      */
     public function getColumns(): array
     {
