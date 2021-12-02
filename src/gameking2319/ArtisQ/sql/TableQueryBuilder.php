@@ -13,6 +13,10 @@ final class TableQueryBuilder
     /** @var string */
     public const DROP = "drop";
 
+    /**
+     * @param Table $table
+     * @param string $action
+     */
     public function __construct(Table $table, string $action = "build")
     {
         switch($action){
@@ -27,6 +31,10 @@ final class TableQueryBuilder
         }
     }
 
+    /**
+     * @param Table $table
+     * @return void
+     */
     public function createTable(Table $table): void
     {
         $name = $table->getName();
@@ -46,6 +54,10 @@ final class TableQueryBuilder
         $instance->getDatabase()->query("CREATE TABLE IF NOT EXISTS {$name} ( {$SQLColumns} )");
     }
 
+    /**
+     * @param Table $table
+     * @return void
+     */
     public function dropTable(Table $table): void
     {
         $name = $table->getName();

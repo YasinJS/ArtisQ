@@ -16,9 +16,13 @@ final class ModelQueryBuilder
     /** @var string */
     public const GET = "get";
 
-    /** @var Model[] | Model  */
+    /** @var Model[] | array  */
     private array | Model $models;
 
+    /**
+     * @param Model $model
+     * @param string $action
+     */
     public function __construct(Model $model, string $action = "get")
     {
         switch ($action){
@@ -39,6 +43,10 @@ final class ModelQueryBuilder
         }
     }
 
+    /**
+     * @param Model $model
+     * @return void
+     */
     public function getData(Model $model): void
     {
         $table = $model->getTable();
@@ -56,6 +64,7 @@ final class ModelQueryBuilder
 
         $instance = ArtisQ::getInstance();
         $stmt = $instance->getDatabase()->prepare($query);
+        if($stmt === false)return;
         foreach ($values as $key => $value){
             $stmt->bindValue($key, $value);
         }
@@ -80,7 +89,8 @@ final class ModelQueryBuilder
         // Look if there is only 1
         if(count($models) === 1)
             $this->models = $models[0];
-        else $this->models = $models;
+        else
+            $this->models = $models;
     }
 
     /**
@@ -101,11 +111,15 @@ final class ModelQueryBuilder
 
         $instance = ArtisQ::getInstance();
         $stmt = $instance->getDatabase()->prepare($query);
+        if($stmt === false)return;
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
 
-
+    /**
+     * @param Model $model
+     * @return void
+     */
     public function updateModel(Model $model): void
     {
         $instance = ArtisQ::getInstance();
@@ -141,6 +155,11 @@ final class ModelQueryBuilder
 
         $stmt->execute();
     }
+
+    /**
+     * @param Model $model
+     * @return void
+     */
     public function createModel(Model $model): void{
         $instance = ArtisQ::getInstance();
 

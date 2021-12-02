@@ -9,7 +9,7 @@ final class Table
 {
 
     private string $name = "";
-    /** @var array<string, string[]> */
+    /** @var array<string, mixed> */
     private array $columns = [];
 
     public function __construct(string $name, ?Closure $closure = null)
@@ -39,7 +39,7 @@ final class Table
         return $this;
     }
 
-    public static function create(string $name, Closure $closure){
+    public static function create(string $name, Closure $closure): Table {
         return new self($name, $closure);
     }
 

@@ -31,6 +31,11 @@ abstract class Model
         return (new static())->$name(...$arguments);
     }
 
+    /**
+     * @param string $name
+     * @param string[] $arguments
+     * @return mixed
+     */
     public function __call(string $name, array $arguments): mixed
     {
         return $this->$name(...$arguments);
@@ -54,6 +59,9 @@ abstract class Model
 
     abstract public function getTable(): string;
 
+    /**
+     * @return string[]
+     */
     public function getConditions(): array
     {
         return $this->conditions;

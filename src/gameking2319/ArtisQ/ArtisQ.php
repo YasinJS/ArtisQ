@@ -19,11 +19,17 @@ final class ArtisQ extends PluginBase
         $this->database = new SQLite3($this->getDataFolder() . "database.db");
     }
 
+    /**
+     * @return SQLite3
+     */
     public function getDatabase(): SQLite3
     {
         return $this->database;
     }
 
+    /**
+     * @return ArtisQ
+     */
     public static function getInstance(): ArtisQ
     {
         return self::$instance;
